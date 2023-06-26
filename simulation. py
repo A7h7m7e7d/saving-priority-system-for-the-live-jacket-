@@ -1,0 +1,134 @@
+fx = 35
+fy = 19
+fs = "live"  # takes "live"
+fc = "under"  # "under"
+
+sx = 90
+sy = 100
+ss = "die"
+sc = "under"
+
+
+import turtle
+import math
+
+screen = turtle.Screen()
+screen.setup(800, 600)  # Set the dimensions of the window
+screen.bgcolor("sky blue")  # Set the background color to sky blue
+
+# Create a sea-like background
+sea = turtle.Turtle()
+sea.speed(0)  # Set the drawing speed to the fastest
+sea.color("medium blue")  # Set the color of the sea
+sea.begin_fill()
+sea.goto(-400, -300)  # Position the turtle at the bottom-left corner
+sea.goto(400, -300)  # Draw a rectangle for the sea
+sea.goto(400, 300)
+sea.goto(-400, 300)
+sea.goto(-400, -300)
+sea.end_fill()
+
+# Add some details to the sea
+detail = turtle.Turtle()
+detail.speed(0)  # Set the drawing speed to the fastest
+detail.color("white")  # Set the color of the details
+
+# Draw wavy lines to represent waves
+detail.penup()
+detail.goto(-400, -200)  # Position the turtle at the bottom-left corner
+detail.pendown()
+for _ in range(41):
+    detail.forward(20)
+    detail.left(90)
+    detail.forward(10)
+    detail.left(90)
+    detail.forward(20)
+    detail.right(90)
+    detail.forward(10)
+    detail.right(90)
+
+# Keep the turtle graphics window open
+
+pen1 = turtle.Turtle()
+pen2 = turtle.Turtle()
+pen2.color("cyan")
+pen3 = turtle.Turtle()
+pen3.color("purple")
+pen3.width(5)
+pen1.width(3)
+pen2.width(3)
+pen1.speed(0)
+pen1.penup()
+pen1.forward(fx)
+pen1.left(90)
+pen1.forward(fy)
+pen1.pendown()
+pen2.speed(0)
+pen2.penup()
+pen2.forward(sx)
+pen2.left(90)
+pen2.forward(sy)
+pen2.pendown()
+for i in range(100):
+    pen1.forward(i / 6)
+    pen1.left(230)
+    pen2.forward(i / 6)
+    pen2.left(230)
+print(pen3.xcor())
+
+# the nearest function
+def nearst(fx, fy, sx, sy):
+    d1 = math.sqrt(fx**2 + fy**2)
+    d2 = math.sqrt(sx**2 + sy**2)
+    if d1 < d2:
+        return "fn"
+    else:
+        return "sn"
+
+
+# a live or not:
+def alive(fs, ss):
+    if fs == "live" and ss == "live":
+        return "b"
+    elif fs == "live":
+        return "fn"
+    else:
+        return "sn"
+
+
+# under or benth the water
+def conditions(fc, sc):
+    if fc == "under" and sc == "under":
+        return nearst(fx, fy, sx, sy)
+    elif fc == "under":
+        return "fn"
+    else:
+        return "sn"
+
+
+# print(nearst(fx,fy,sx,sy),alive(fs,ss),conditions(fc,sc))
+n = [nearst(fx, fy, sx, sy), alive(fs, ss), conditions(fc, sc)]
+if n[1] == "fn":
+    pen3.goto(fx, fy)
+    pen3.goto(sx, sy)
+elif n[1] == "sn":
+    pen3.goto(sx, sy)
+    pen3.goto(fx, fy)
+elif n[1] == "b":
+    if n[0] == "fn" and n[2] == "fn":
+        pen3.goto(fx, fy)
+        pen3.goto(sx, sy)
+    elif n[0] == "sn" and n[2] == "sn":
+        pen3.goto(sx, sy)
+        pen3.goto(fx, fy)
+    elif n[0] == "sn" and n[2] == "fn":
+        pen3.goto(sx, sy)
+        pen3.goto(fx, fy)
+    elif n[0] == "fn" and n[2] == "sn":
+        pen3.goto(fx, fy)
+        pen3.goto(sx, sy)
+
+
+
+
+
