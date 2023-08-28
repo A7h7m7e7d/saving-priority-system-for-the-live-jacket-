@@ -1,15 +1,15 @@
-fx = 333
-fy = 120
+fx = 50
+fy = 100
 fs = "live"  # takes "live"
 fc = "under"  # "under"
-
-sx = 160
-sy = 203
-ss = ""
+#green
+sx = -50
+sy = -20
+ss = "live"
 sc = "under"
-
-tx = 60
-ty = 160
+#Black
+tx = -60
+ty = -160
 ts = "live"
 tc = "under"
 
@@ -66,9 +66,9 @@ print(pen3.xcor())
 
 # the nearest function
 def nearest(fx, fy, sx, sy, tx, ty):
-    d1 = math.sqrt(fx ** 2 + fy ** 2)
-    d2 = math.sqrt(sx ** 2 + sy ** 2)
-    d3 = math.sqrt(tx ** 2 + ty ** 2)
+    d1 = math.sqrt(fx ** 2 + fy ** 2)-math.sqrt(pen3.xcor() ** 2 + pen3.ycor() ** 2)
+    d2 = math.sqrt(sx ** 2 + sy ** 2)-math.sqrt(pen3.xcor() ** 2 + pen3.ycor() ** 2)
+    d3 = math.sqrt(tx ** 2 + ty ** 2)-math.sqrt(pen3.xcor() ** 2 + pen3.ycor() ** 2)
     a = [d1, d2, d3]
     a_name = {d1: "fn", d2: "sn", d3: "tn"}
     a_sorted = sorted(a)
